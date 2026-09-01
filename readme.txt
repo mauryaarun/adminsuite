@@ -4,13 +4,6 @@
    SSH Client · DB GUI · Automation Center
 ================================================================================
 
-  Author       : Admin Suite Project
-  Version      : 6.1
-  License      : MIT
-  Platform     : Linux / macOS / Windows (WSL recommended)
-  Python       : 3.10+
-  Framework    : PyQt6 + QWebEngine (xterm.js)
-
 ================================================================================
   TABLE OF CONTENTS
 ================================================================================
@@ -819,34 +812,9 @@ application lean and focused:
   - Ansible Vault password integration
   - Ansible roles/galaxy management
 
-================================================================================
-  21. CONTRIBUTING
-================================================================================
-
-This is a single-file application by design. To contribute:
-
-1. Fork the repository
-2. Make changes in linuxadmin.py
-3. Follow existing code style:
-   - 4-space indentation
-   - Section headers with ==== comment blocks
-   - emit_log() for debug messages
-   - notifications.push() for user-facing messages
-   - CURRENT_THEME dict for all colors (no hardcoded colors)
-4. Test with all 4 UI themes
-5. Test SSH, SFTP, DB, and Ansible features
-6. Submit a pull request with a clear description
-
-CODE CONVENTIONS
-  - All SSH connections go through _ssh_kwargs() helper
-  - All credentials accessed via profile_creds() helper
-  - Database operations use BACKENDS dict for backend dispatch
-  - QThread subclasses for all blocking operations
-  - Signals/slots for thread-to-UI communication
-  - keyring for credential storage, JSON for configuration
 
 ================================================================================
-  22. LICENSE & DISCLAIMER
+  21. LICENSE & DISCLAIMER
 ================================================================================
 
 MIT License
