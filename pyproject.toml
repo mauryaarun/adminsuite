@@ -1,0 +1,30 @@
+[project]
+name = "admin-suite"
+version = "5.0.0"
+description = "Modular Linux admin suite: SSH, SFTP, DB, Ansible, VPN"
+requires-python = ">=3.10"
+
+dependencies = [
+    "PyQt6",
+    "PyQt6-WebEngine",
+    "paramiko",
+    "sshtunnel",
+    "pymysql",
+    "keyring",
+    "ansible",
+]
+
+[project.optional-dependencies]
+postgres = [
+    "psycopg2-binary",
+]
+dev = [
+    "ruff",
+    "black",
+    "mypy",
+    "pytest",
+    "pytest-qt",
+]
+
+[project.gui-scripts]
+admin-suite = "admin_suite.app:main"

@@ -1,0 +1,35 @@
+# =============================================================================
+# Admin Suite v4 — Requirements
+# =============================================================================
+# Core GUI Framework
+PyQt6>=6.5.0
+PyQt6-WebEngine>=6.5.0
+
+# SSH & Remote Connectivity
+paramiko>=3.0.0
+sshtunnel>=0.4.0
+
+# Database Drivers
+PyMySQL>=1.1.0
+
+# Credential Storage
+keyring>=24.0.0
+
+# =============================================================================
+# Optional Dependencies (uncomment as needed)
+# =============================================================================
+
+# PostgreSQL support (Database Manager → PostgreSQL backend)
+# psycopg2-binary>=2.9.9
+
+# Ansible Center (ad-hoc commands + playbook runner)
+# ansible>=9.0.0
+
+# =============================================================================
+# Notes:
+# - sqlite3 is part of Python stdlib (no install needed)
+# - pty, fcntl, select are Linux/macOS stdlib (local terminal)
+# - On Windows, local terminal tab will not work (requires pty/fcntl)
+# - PyQt6-WebEngine pulls in PyQt6-Qt6 and PyQt6-sip automatically
+# - For offline xterm.js download on first launch, internet is required once
+# =============================================================================
