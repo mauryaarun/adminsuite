@@ -249,7 +249,7 @@ STEP 1 — Create a virtual environment (recommended):
 
 STEP 2 — Install core dependencies:
 
-    pip install PyQt6 PyQt6-WebEngine paramiko sshtunnel PyMySQL keyring
+    pip install -r requirements.txt
 
 STEP 3 — Install optional dependencies:
 
@@ -259,19 +259,31 @@ STEP 3 — Install optional dependencies:
     # Ansible Center
     pip install ansible
 
-STEP 4 — Or install from requirements.txt:
+STEP 4 — python libraries install from requirements.txt:
 
     pip install -r requirements.txt
 
-STEP 5 — Run the application:
+STEP 5 — Compile and Run the application:
+cd ..
+cp admin_suite/admin_entry .
 
-    python linuxadmin.py
+compile it with :
+
+$pyinstaller --name AdminSuite admin_entry.py
+$python -m PyInstaller --clean --noconfirm AdminSuite.spec
+
+and run it : 
+
+$./dist/AdminSuite
+
+
+
 
 STEP 6 — (Optional) Create a desktop shortcut:
 
     [Desktop Entry]
-    Name=Admin Suite v4
-    Exec=/home/YOURUSER/.venvs/adminsuite/bin/python /path/to/linuxadmin.py
+    Name=Admin Suite
+    Exec=/home/YOURUSER/.venvs/adminsuite/bin/python /path/to/AdminSuite
     Icon=/path/to/icon.png
     Type=Application
     Categories=System;Network;Database;
