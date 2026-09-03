@@ -1,0 +1,28 @@
+python -m PyInstaller \
+  --noconfirm \
+  --clean \
+  --onefile \
+  --windowed \
+  --name AdminSuite \
+  --icon=icon.ico \
+  --paths . \
+  --optimize 2 \
+  --collect-all PyQt6 \
+  --collect-all PyQt6.QtWebEngineCore \
+  --collect-all PyQt6.QtWebEngineWidgets \
+  --collect-all PyQt6.QtWebChannel \
+  --collect-all paramiko \
+  --collect-all sshtunnel \
+  --collect-all keyring \
+  --collect-all pymysql \
+  --hidden-import admin_suite \
+  --hidden-import admin_suite.app \
+  --hidden-import admin_suite.services \
+  --hidden-import admin_suite.ui.main_window \
+  --hidden-import admin_suite.ai \
+  --hidden-import admin_suite.ai.assistant_tab \
+  --hidden-import admin_suite.ai.ollama_client \
+  --collect-binaries PyQt6 \
+  --collect-datas admin_suite \
+  admin_entry.py
+  #--strip \

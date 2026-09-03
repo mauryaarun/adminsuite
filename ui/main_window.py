@@ -167,7 +167,7 @@ class MainWindow(QMainWindow):
 
         self.services = services
 
-        self.setWindowTitle("Admin Suite v5 — Modular")
+        self.setWindowTitle("Admin Suite")
         self.resize(1440, 860)
 
         self.profiles: dict[str, dict[str, Any]] = {}
