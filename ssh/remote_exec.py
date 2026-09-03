@@ -19,7 +19,7 @@ class RemoteExecThread(QThread):
 
     def __init__(
         self,
-        profile: Optional[str] = None,
+        profile: Optional[dict[str, Any]] = None,
         cmd: str = "",
         timeout: Optional[float] = None,
         parent: Optional[Any] = None,
@@ -31,25 +31,55 @@ class RemoteExecThread(QThread):
 
     def run(self) -> None:
         try:
-            # Example implementation for SSH execution
+            # If no profile or empty profile, run locally
+            if not self.profile:
+                result = subprocess.run(
+                    self.cmd,
+                    shell=True,
+                    capture_output=True,
+                    text=True,
+                    timeout=self.timeout,
+                )
+                output = result.stdout
+                if result.stderr:
+                    output += "\n" + result.stderr
+                self.finished_cmd.emit(output, result.returncode)
+                return
+
+            # Extract connection parameters from profile
+            host = self.profile.get("ssh_host", "localhost")
+            port = int(self.profile.get("ssh_port", 22) or 22)
+            user = self.profile.get("ssh_user", "")
+            
+            # Extract credentials
             creds = profile_creds(self.profile)
-            kw = ssh_kwargs(creds)
+            
+            # Build SSH kwargs with all connection parameters
+            kw = ssh_kwargs(
+                host=host,
+                port=port,
+                user=user,
+                creds=creds,
+            )
+            
+            # Create and connect SSH client
             client = create_ssh_client()
             client.connect(**kw)
-
+            
+            # Execute command
             stdin, stdout, stderr = client.exec_command(
                 self.cmd,
                 timeout=self.timeout,
             )
-
+            
             out = stdout.read().decode("utf-8", errors="replace")
             err = stderr.read().decode("utf-8", errors="replace")
-
             rc = stdout.channel.recv_exit_status()
-
+            
             client.close()
-
             self.finished_cmd.emit(out + err, rc)
-
+            
+        except subprocess.TimeoutExpired:
+            self.finished_cmd.emit("[timeout]\n", 124)
         except Exception as e:
-            self.finished_cmd.emit(f"[error] {e}", -1)
+            self.finished_cmd.emit(f"[error] {e}\n", -1)
